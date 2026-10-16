@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هديتي ليكي يروحي </title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#1a0a14;--card:#2a1222;--pink:#ff6f9c;--rose:#ffb3c9;--text:#fff0f5;--gold:#ffd7a8}
+@media (prefers-color-scheme: light){:root{--bg:#1a0a14}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cairo',Tahoma,sans-serif;background:radial-gradient(circle at 20% 0%,#4a1536 0,var(--bg) 55%);color:var(--text);min-height:100vh;overflow-x:hidden;text-align:center}
+#hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.heart{position:absolute;bottom:-40px;animation:rise linear forwards;opacity:.7}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+section{position:relative;z-index:1;padding:70px 18px;max-width:1000px;margin:auto}
+h1{font-family:'Reem Kufi','Cairo',sans-serif;font-size:clamp(3rem,12vw,6.5rem);color:var(--pink);text-shadow:0 0 30px #ff6f9c88;line-height:1.2}
+h2{font-size:clamp(1.6rem,5vw,2.4rem);color:var(--rose);margin-bottom:28px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px}
+.hero p{font-size:1.3rem;color:var(--gold);max-width:560px}
+.beat{display:inline-block;animation:beat 1.2s infinite;font-size:3rem}
+@keyframes beat{0%,100%{transform:scale(1)}30%{transform:scale(1.3)}}
+.btn{background:linear-gradient(135deg,#ff6f9c,#ff3d7f);color:#fff;border:0;padding:14px 30px;border-radius:40px;font:800 1.1rem 'Cairo';cursor:pointer;box-shadow:0 8px 25px #ff3d7f55;text-decoration:none;margin-top:14px}
+.btn:active{transform:scale(.95)}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+.box{background:var(--card);border:1px solid #ff6f9c44;border-radius:20px;padding:22px 6px}
+.box b{display:block;font-size:clamp(1.8rem,7vw,3rem);color:var(--pink)}
+.box span{color:var(--rose);font-size:.95rem}
+.big{font-size:1.25rem;margin-bottom:20px;color:var(--gold)}
+.days-num{font-size:clamp(4rem,16vw,8rem);font-weight:800;color:var(--pink);text-shadow:0 0 30px #ff6f9c88;line-height:1}
+.bdays{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.bd{background:var(--card);border:1px solid #ff6f9c44;border-radius:24px;padding:26px}
+.bd h3{color:var(--gold);margin-bottom:6px}
+.bd .n{font-size:3rem;font-weight:800;color:var(--pink)}
+.bd small{color:var(--rose)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.photo{background:var(--card);border-radius:22px;padding:12px;border:1px solid #ff6f9c33;transition:.3s}
+.photo:hover{transform:translateY(-6px) rotate(-1deg)}
+.slot{aspect-ratio:4/5;border-radius:16px;border:2px dashed #ff6f9c88;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:var(--rose);overflow:hidden;background:#ffffff08}
+.slot img{width:100%;height:100%;object-fit:cover;display:block}
+.slot .ic{font-size:2.4rem}
+.cap{margin-top:10px;outline:0;color:var(--gold);min-height:1.6em}
+.hint{font-size:.85rem;color:#ffb3c999;margin-top:18px}
+.msgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.msg{background:var(--card);border-radius:20px;padding:22px;border-right:4px solid var(--pink);text-align:right;line-height:1.9}
+.letter{background:linear-gradient(160deg,#3a1630,#2a1222);border-radius:26px;padding:34px 26px;line-height:2.1;font-size:1.15rem;text-align:right;border:1px solid #ff6f9c55}
+footer{position:relative;z-index:1;padding:40px 18px 60px;color:var(--rose)}
+
+#lock{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 20%,#4a1536,#1a0a14 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;transition:opacity .8s}
+#lock.open{opacity:0;pointer-events:none}
+#lock h2{margin:0}
+#lock input{width:min(320px,90%);padding:14px 18px;border-radius:40px;border:2px solid #ff6f9c88;background:#ffffff10;color:var(--text);font:600 1.1rem 'Cairo';text-align:center;outline:0}
+#lock input:focus{border-color:var(--pink)}
+#lock .err{color:#ff8fa8;min-height:1.5em}
+#lock.shake input{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+body.locked{overflow:hidden}
+</style>
+</head>
+<body class="locked">
+<div id="hearts"></div>
+<div id="lock">
+  <div class="beat">🔐</div>
+  <h2>الموقع دا ليكي بس يحبي💕</h2>
+  <p class="big" id="hint">اكتبي كلمة السر علشان تدخلي</p>
+  <input type="password" id="pw" placeholder="كلمة السر" autocomplete="off">
+  <button class="btn" id="enter">دخول ❤</button>
+  <div class="err" id="err"></div>
+</div>
+
+<section class="hero">
+  <div class="beat">💖</div>
+  <h1>بحبك </h1>
+  <p>يا أحلى حاجة حصلتلي في الدنيا.. الموقع ده عشانك إنتي بس يا جوجو 🌹</p>
+  <a href="#counter" class="btn">يلا نشوف حكايتنا ❤</a>
+</section>
+
+<section id="counter">
+  <h2>بنحب بعض من أول يوم 2 / 8 / 2026 ❤</h2>
+  <div class="days-num" id="days">0</div>
+  <p class="big">يوم من الحب معاكي.. ولسه كل يوم أحلى 🥰</p>
+  <div class="timer">
+    <div class="box"><b id="h">0</b><span>ساعة</span></div>
+    <div class="box"><b id="m">0</b><span>دقيقة</span></div>
+    <div class="box"><b id="s">0</b><span>ثانية</span></div>
+    <div class="box"><b id="w">0</b><span>أسبوع</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>أعياد ميلادنا 🎂</h2>
+  <div class="bdays">
+    <div class="bd"><h3>🎀 عيد ميلاد جننه (8 / 4)</h3><div class="n" id="b1">0</div><small>يوم لحد عيد ميلادك يا قمر</small></div>
+    <div class="bd"><h3>🎈 عيد ميلادي (25 / 6)</h3><div class="n" id="b2">0</div><small>يوم لحد عيد ميلادي، جهزي الهدية 😉</small></div>
+  </div>
+</section>
+
+<section>
+  <h2>المفروض احط صورنا بس عشان انا خروف احم حطيت صورك بس 📸</h2>
+  <div class="gallery" id="gallery"></div>
+  <p class="hint">كل لحظة معاكي تستاهل صورة 🤍</p>
+</section>
+
+<section>
+  <h2>كلام من قلبي 💌</h2>
+  <div class="msgs">
+    <div class="msg">إنتي مش بس حبيبتي يا جننه، إنتي بيتي وأمانى وضحكتي في أصعب الأيام.</div>
+    <div class="msg">كل يوم بعدّه معاكي بحس إن ربنا كان بيحضّرلي حاجة حلوة قوي وأنا مش واخد بالي.</div>
+    <div class="msg">ضحكتك بتصلّح يومي كله، وصوتك أحلى أغنية سمعتها في حياتي.</div>
+    <div class="msg">وعد مني أفضل جنبك وأسندك وأحبك أكتر كل يوم عن اللي قبله ❤</div>
+  </div>
+</section>
+
+<section>
+  <h2>رسالة صغيرة ليكي 🌷</h2>
+  <div class="letter">
+    إلى أجمل جننه في الكون،<br>
+    من يوم 2 / 8 / 2026 والدنيا بقت لونها تاني. بقيت بستنى رسالتك، وأفرح لما أسمع اسمك، وأحس إن قلبي لقى مكانه أخيرًا.
+    أنا بحبك بكل عيوبي وبكل مميزاتك، وبحلم باليوم اللي نحتفل فيه بكل أعياد ميلادنا مع بعض، عيد ميلادك في 8 / 4 وعيد ميلادي في 25 / 6، وكل يوم بينهم.
+    <br><br>
+    بحبك يا جوجو.. ولسه الحكاية في أولها ❤<br>
+    <b>حبيبك ♥</b>
+  </div>
+  <button class="btn" id="loveBtn">اضغطي هنا 💘</button>
+</section>
+
+<footer>اعتبرها هديه ولا مش كفايه</footer>
+
+<script>
+const START = new Date(2026, 7, 2);          // 2 أغسطس 2026
+function pad(n){return String(n)}
+function tick(){
+  const now = new Date();
+  let diff = Math.max(0, now - START);
+  const totalDays = Math.floor(diff/86400000);
+  document.getElementById('days').textContent = totalDays;
+  document.getElementById('h').textContent = Math.floor(diff/3600000)%24;
+  document.getElementById('m').textContent = Math.floor(diff/60000)%60;
+  document.getElementById('s').textContent = Math.floor(diff/1000)%60;
+  document.getElementById('w').textContent = Math.floor(totalDays/7);
+}
+function daysUntil(day, month){
+  const now = new Date(); const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  let t = new Date(now.getFullYear(), month-1, day);
+  if (t < today) t = new Date(now.getFullYear()+1, month-1, day);
+  return Math.round((t - today)/86400000);
+}
+function bdays(){
+  const a = daysUntil(8,4), b = daysUntil(25,6);
+  document.getElementById('b1').textContent = a === 0 ? '🎉 النهاردة!' : a;
+  document.getElementById('b2').textContent = b === 0 ? '🎉 النهاردة!' : b;
+}
+tick(); bdays(); setInterval(tick,1000); setInterval(bdays,3600000);
+
+// ===== الصور =====
+// حط اسم ملف الصورة في src (الصور تكون في نفس فولدر الملف، أو جوا فولدر اسمه photos).
+// مثال: src: 'photos/1.jpg'   ولو سبتها فاضية بيظهر مربع فاضي. غيّر caption براحتك.
+const PHOTOS = [
+  { src: '7.jpeg', caption: 'بحبك اويييي 💞' },
+  { src: '5.jpeg', caption: 'مزاااا' },
+  { src: 'WhatsApp Image 2026-10-16 at 8.01.37 PM (2).jpeg', caption: 'ضحكتك ❤' },
+  { src: 'WhatsApp Image 2026-10-16 at 8.01.37 PM (4).jpeg', caption: 'ذكرى لا تنسى' },
+  { src: 'WhatsApp Image 2026-10-16 at 8.01.38 PM.jpeg', caption: 'بموت فيكي يمزا ' },
+  { src: 'WhatsApp Image 2026-10-16 at 8.01.39 PM.jpeg', caption: 'صورة بحبها 🌹' },
+  // تقدر تضيف أكتر: { src: 'photos/7.jpg', caption: 'كلام تحت الصورة' },
+];
+const gal = document.getElementById('gallery');
+PHOTOS.forEach(ph=>{
+  const card = document.createElement('div'); card.className = 'photo';
+  const slot = document.createElement('div'); slot.className = 'slot'; slot.style.cursor = 'default';
+  if (ph.src) {
+    const im = new Image(); im.src = ph.src; im.alt = ph.caption;
+    im.onerror = ()=>{ slot.innerHTML = '<div class="ic">⚠️</div><div>الصورة مش لاقيها: '+ph.src+'</div>'; };
+    slot.style.border = '0'; slot.appendChild(im);
+  } else {
+    slot.innerHTML = '<div class="ic">📷</div><div>مكان صورتنا</div>';
+  }
+  const cap = document.createElement('div'); cap.className = 'cap'; cap.textContent = ph.caption;
+  card.append(slot, cap); gal.appendChild(card);
+});
+
+// Floating hearts
+const box = document.getElementById('hearts');
+const emojis = ['❤'];
+function spawn(x){
+  const h = document.createElement('div'); h.className='heart';
+  h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  h.style.left = (x ?? Math.random()*100) + (x? 'px':'%');
+  h.style.fontSize = (14+Math.random()*26)+'px';
+  h.style.animationDuration = (6+Math.random()*7)+'s';
+  box.appendChild(h); setTimeout(()=>h.remove(),13000);
+}
+setInterval(()=>spawn(),700);
+document.getElementById('loveBtn').onclick = ()=>{ for(let i=0;i<40;i++) setTimeout(()=>spawn(),i*40); };
+document.addEventListener('click',e=>spawn(e.clientX));
+
+// ===== كلمة السر =====
+// غيّر الكلمتين هنا (أي واحدة منهم تفتح الموقع). تقدر تضيف أكتر.
+const PASSWORDS = ['بحبك يا ليو', 'جوجو','ليو'];
+const HINT = 'تلميح: انا اسمي ايه';   // غيّره أو سيبه فاضي
+const lock = document.getElementById('lock'), pw = document.getElementById('pw');
+document.getElementById('hint').textContent = HINT || 'اكتبي كلمة السر علشان تدخلي';
+function unlock(){ lock.classList.add('open'); document.body.classList.remove('locked'); setTimeout(()=>lock.remove(),900); }
+function tryLogin(){
+  const v = pw.value.trim().toLowerCase();
+  if (PASSWORDS.some(p => p.toLowerCase() === v)) {
+    try{ sessionStorage.setItem('janna_ok','1') }catch(e){}
+    unlock();
+    for(let i=0;i<30;i++) setTimeout(()=>spawn(),i*40);
+  } else {
+    document.getElementById('err').textContent = 'كلمة السر غلط يا روحي، جربي تاني 🥺';
+    lock.classList.remove('shake'); void lock.offsetWidth; lock.classList.add('shake');
+    pw.value = '';
+  }
+}
+document.getElementById('enter').onclick = tryLogin;
+pw.addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+try{ if(sessionStorage.getItem('janna_ok')==='1') unlock(); }catch(e){}
+</script>
+</body>
+</html>
